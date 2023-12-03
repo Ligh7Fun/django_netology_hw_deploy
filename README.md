@@ -1,8 +1,44 @@
-Установка пакетов:
+<details>
+  <summary>Создание пользователя</summary>
 
-`pip install Django gunicorn`
+Выполняем команду `adduser denis` для создания пользователя.
 
-Структура проекта:
+Добавляем в кгруппу `usermod denis -aG sudo`
+
+Меняем пользователя `su denis`
+  
+</details>
+
+<details>
+  <summary>Создаем ssh ключ и алиас</summary>
+
+Создаем ключ на своем пк командой `ssh-keygen -t rsa`
+    
+Копируем его на удаленный сервер командой `sh-copy-id -i ~/.ssh/id_rsa.pub user@server` заменив user и server на свои данные.
+
+Настраиваем на своем пк `~/.ssh/config` добавив:
+```
+Host netology_hw
+    HostName 79.174.83.158
+    User denis
+```
+
+При выполнении команды `ssh netology_hw` происходит подключение к удаленному серверу без ввода пароля.
+
+</details>
+
+   
+<details>
+  <summary>Установка пакетов</summary>
+
+```python
+pip install Django gunicorn
+```
+  
+</details>   
+
+<details>
+  <summary>Структура проекта</summary>
 
 ```
 (env) root@cv3411647:~/project# tree -L 2
@@ -21,8 +57,12 @@
     ├── promo.sock
     └── static
 ```
+  
+</details>
 
-Структура конфига nginx:
+<details>
+  <summary>Структура конфига nginx</summary>
+
 ```nginx
 server {
   listen 80;
@@ -38,8 +78,12 @@ server {
   }
 }
 ```
+  
+</details>
 
-Структура gunicorn.service:
+<details>
+  <summary>Структура gunicorn.service</summary>
+
 ```
 [Unit]
 Description=promo landing
@@ -54,4 +98,5 @@ ExecStart=/root/project/env/bin/gunicorn --workers 3 -b unix:/root/project/promo
 [Install]
 WantedBy=multi-user.target
 ```
-
+  
+</details>
