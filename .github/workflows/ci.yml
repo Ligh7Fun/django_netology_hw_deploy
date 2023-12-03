@@ -15,18 +15,18 @@ jobs:
       SECRET_KEY: ${{ secrets.SECRET_KEY }}
       DEBUG: ${{ secrets.DEBUG }}
       ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
-      DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
-      DATABASE_USER: ${{ secrets.DATABASE_USER }}
-      DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-      DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
-      DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
+      DB_NAME: ${{ secrets.DB_NAME }}
+      DB_USER: ${{ secrets.DB_USER }}
+      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      DB_HOST: ${{ secrets.DB_HOST }}
+      DB_PORT: ${{ secrets.DB_PORT }}
     services:
       postgres:
         image: postgres:13
         env:
-          POSTGRES_USER: ${{ secrets.DATABASE_USER }}
-          POSTGRES_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-          POSTGRES_DB: ${{ secrets.DATABASE_NAME }}
+          POSTGRES_USER: ${{ secrets.DB_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          POSTGRES_DB: ${{ secrets.DB_NAME }}
         ports:
           - 5432:5432
         options:
@@ -51,15 +51,14 @@ jobs:
       - name: Линтинг
         run: flake8 --filename=tests.py --exclude=promo/landing/migrations
 
-#      - name: Тесты
-#        run: |
-#          python manage.py test
-#        env:
-#          SECRET_KEY: ${{ secrets.SECRET_KEY }}
-#          DEBUG: ${{ secrets.DEBUG }}
-#          ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
-#          DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
-#          DATABASE_USER: ${{ secrets.DATABASE_USER }}
-#          DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-#          DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
-#          DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
+      - name: Тесты
+        run: python manage.py test
+        env:
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          DEBUG: ${{ secrets.DEBUG }}
+          ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
+          DB_NAME: ${{ secrets.DB_NAME }}
+          DB_USER: ${{ secrets.DB_USER }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_PORT: ${{ secrets.DB_PORT }}
