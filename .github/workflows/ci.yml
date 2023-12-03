@@ -22,7 +22,7 @@ jobs:
       DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
     services:
       postgres:
-        image: postgres:alpine
+        image: postgres:alpine3.17
         env:
           POSTGRES_USER: ${{ secrets.DATABASE_USER }}
           POSTGRES_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
