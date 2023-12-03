@@ -64,13 +64,17 @@ jobs:
           DB_HOST: ${{ secrets.DB_HOST }}
           DB_PORT: ${{ secrets.POSTGRES_PORT }}
 
-#      - name: Деплой
-#        uses: appleboy/ssh-action@master
-#        with:
-#          host: ${{ secrets.HOST }}
-#          username: ${{ secrets.USER }}
-#          password: ${{ secrets.PASSWORD }}
-#          port: ${{ secrets.PORT }}
-#          script: |
-#            cd promo
-#            git pull
+      - name: Деплой
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: |
+            cd /home/denis/django_cicd
+            git pull
+            source env/bin/activate
+            pip install -r requirements.txt
+            python /promo/manage.py migrate
+            python /promo/manage.py collectstatic
+            sudo systemctl restart gunicorn
