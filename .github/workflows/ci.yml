@@ -27,8 +27,9 @@ jobs:
           POSTGRES_USER: ${{ secrets.DB_USER }}
           POSTGRES_PASSWORD: ${{ secrets.DB_PASSWORD }}
           POSTGRES_DB: ${{ secrets.DB_NAME }}
+          POSTGRES_PORT: ${{ secrets.DB_PORT }}
         ports:
-          - 5432:5432
+          - ${{ secrets.DB_PORT }}:${{ secrets.DB_PORT }}
         options:
           --health-cmd pg_isready
           --health-interval 5s
@@ -62,3 +63,14 @@ jobs:
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
           DB_HOST: ${{ secrets.DB_HOST }}
           DB_PORT: ${{ secrets.DB_PORT }}
+
+#      - name: Деплой
+#        uses: appleboy/ssh-action@master
+#        with:
+#          host: ${{ secrets.HOST }}
+#          username: ${{ secrets.USER }}
+#          password: ${{ secrets.PASSWORD }}
+#          port: ${{ secrets.PORT }}
+#          script: |
+#            cd promo
+#            git pull
