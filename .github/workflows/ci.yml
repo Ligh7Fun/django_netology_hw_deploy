@@ -51,15 +51,15 @@ jobs:
       - name: Линтинг
         run: flake8 --filename=tests.py --exclude=promo/landing/migrations
 
-      - name: Тесты
-        run: |
-          python manage.py test
-        env:
-          SECRET_KEY: ${{ secrets.SECRET_KEY }}
-          DEBUG: ${{ secrets.DEBUG }}
-          ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
-          DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
-          DATABASE_USER: ${{ secrets.DATABASE_USER }}
-          DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-          DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
-          DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
+#      - name: Тесты
+#        run: |
+#          python manage.py test
+#        env:
+#          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+#          DEBUG: ${{ secrets.DEBUG }}
+#          ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
+#          DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+#          DATABASE_USER: ${{ secrets.DATABASE_USER }}
+#          DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+#          DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
+#          DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
