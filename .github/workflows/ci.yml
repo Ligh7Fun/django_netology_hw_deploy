@@ -52,7 +52,7 @@ jobs:
         run: flake8 --filename=tests.py --exclude=promo/landing/migrations
 
       - name: Тесты
-        run: python manage.py test
+        run: python /promo/manage.py test
         env:
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
           DEBUG: ${{ secrets.DEBUG }}
