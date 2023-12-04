@@ -70,11 +70,4 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.SSH_PASSWORD }}
-          script: |
-            cd /home/denis/django_cicd
-            git pull
-            source env/bin/activate
-            pip install -r requirements.txt
-            python /promo/manage.py migrate
-            python /promo/manage.py collectstatic
-            sudo systemctl restart gunicorn
+          script: expect /home/denis/django_cicd/deploy.exp
